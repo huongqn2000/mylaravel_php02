@@ -22,4 +22,12 @@ class Sale extends Model
     public function client(){
         return $this->belongsTo(Client::class, 'client_id', 'id');
     }
+
+    public function sold(){
+        return $this->hasMany(SoldProduct::class, 'sale_id', 'id');
+    }
+
+    public function transaction(){
+        return $this->hasMany(Transaction::class, 'sale_id', 'id');
+    }
 }

@@ -14,7 +14,6 @@ class Transfer extends Model
         'sender_method_id',
         'receiver_method_id',
         'sended_amount',
-        'sended_amount',
         'received_amount',
         'reference'
     ];
@@ -25,5 +24,9 @@ class Transfer extends Model
 
     public function receiverMethod(){
         return $this->belongsTo(PaymentMethod::class, 'receiver_method_id', 'id');
+    }
+
+    public function transaction(){
+        return $this->hasMany(Transaction::class, 'transfer_id', 'id');
     }
 }
