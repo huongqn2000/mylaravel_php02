@@ -1,7 +1,7 @@
 <?php
 if (isset($_SESSION['user']) == false)
 {
-    header('location: login.blade.php');
+    header('location: /login');
     exit();
 }
 ?>

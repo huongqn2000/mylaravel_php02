@@ -1,6 +1,7 @@
 @include('inc.header-not-login')
 <main>
-    <form action="" method="post" style="width: 50%; margin: 10% 0 50px 50px;">
+    <form action="/login-process" method="post" style="width: 50%; margin: 10% 0 50px 50px;">
+        @csrf
         <div class="row mb-3">
             <label for="txtEmail" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
