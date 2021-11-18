@@ -1,3 +1,11 @@
+<?php
+if (isset($_SESSION['user']) == false)
+{
+    header('location: /login');
+    exit();
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,10 +25,10 @@
     <link href="/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" href="/public/image/apple-touch-icon.png" sizes="180x180">
-    <link rel="manifest" href="/public/image/manifest.json">
-    <link rel="mask-icon" href="/public/image/safari-pinned-tab.svg" color="#7952b3">
-    <link rel="icon" href="/public/image/Rose.ico">
+    <link rel="apple-touch-icon" href="/resources/image/apple-touch-icon.png" sizes="180x180">
+    <link rel="manifest" href="/resources/image/manifest.json">
+    <link rel="mask-icon" href="/resources/image/safari-pinned-tab.svg" color="#7952b3">
+    <link rel="icon" href="/resources/image/Rose.ico">
     <meta name="theme-color" content="#7952b3">
 
 
@@ -39,6 +47,7 @@
             }
         }
     </style>
+
 
     <!-- Custom styles for this template -->
     <link href="/resources/css/carousel.css" rel="stylesheet">
@@ -70,6 +79,3 @@
         </div>
     </nav>
 </header>
-
-
-

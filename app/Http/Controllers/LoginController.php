@@ -11,65 +11,26 @@ class LoginController extends Controller
         return view('login');
     }
 
-    public function login(){
-        $errors = [];
+    public function login()
+    {
+        $credentials = $request->validate([
+            'txtEmail' => ['required', 'email'],
+            'txtPass' => ['required'],
+        ]);
 
-        if ($_POST)
-        {
-            if (empty($_POST['txtEmail']))
-            {
-                $errors['txtEmail'] = 'Email is required!';
-            }
-            elseif (filter_var($_POST['txtEmail'], FILTER_VALIDATE_EMAIL) == false)
-            {
-                $errors['txtEmail'] = "Email address '".$_POST['txtEmail']."' is considered invalid.\n";
-            }
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
 
-            if (empty($_POST['txtPass']))
-            {
-                $errors['txtPass'] = 'Password is required!';
-            }
-
-            if ($errors)
-            {
-                $_SESSION['errors'] = $errors;
-                $_SESSION['data'] = $_POST;
-                header('location: /login');
-                exit();
-            }
-
-            $sql = "SELECT `id`, `nickname`, `email` FROM users where `email` = ? AND `password` = ?";
-
-            try {
-                $userModel = new User();
-                $user = $userModel->query($sql, [$_POST['txtEmail'], sha1($_POST['txtPass'])]);
-
-                if ($user)
-                {
-                    $_SESSION['user'] = $user;
-                    header('location: /home');
-                    exit();
-                }
-
-            } catch(\PDOException $e) {
-                $_SESSION['errors'] = ['loginId' => "Error: " . $e->getMessage()];
-                $_SESSION['data'] = $_POST;
-                header('location: /login');
-                exit();
-            }
+            return redirect()->intended('home');
         }
 
-        $_SESSION['errors'] = ['loginId'=>'Password is wrong or User is not existing!'];
-        $_SESSION['data'] = $_POST;
-        header('location: /login');
-        exit();
+        return back()->withErrors([
+            'txtEmail' => 'The provided credentials do not match our records.',
+        ]);
     }
 
     public function logout()
     {
-        unset($_SESSION['user']);
-        session_destroy();
-        header('location: /login');
-        exit();
+
     }
 }
