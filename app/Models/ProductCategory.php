@@ -10,7 +10,10 @@ class ProductCategory extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'id',
+        'name',
+        'created_at',
+        'updated_at'
     ];
 
     public function product(){

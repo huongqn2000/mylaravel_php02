@@ -24,18 +24,21 @@
 <body>
 <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
-    @yield('nav')
+    @include('backend.inc.navigation')
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
+        @include('backend.inc.sidebar')
+
         @yield('main')
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
-        @yield('footer')
+        @include('backend.inc.footer')
         <!-- partial -->
         <!-- main-panel ends -->
     </div>
     <!-- page-body-wrapper ends -->
 </div>
+@yield('modal')
 <!-- container-scroller -->
 <!-- plugins:js -->
 <script src=" {{ asset('js/vendor.bundle.base.js') }}"></script>
@@ -52,5 +55,6 @@
 <!-- Custom js for this page -->
 <script src=" {{ asset('js/dashboard.js') }} "></script>
  <!--End custom js for this page -->
+@yield('js')
 </body>
 </html>
