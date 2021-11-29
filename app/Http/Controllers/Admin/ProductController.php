@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
 {
@@ -14,7 +16,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('backend.products.index');
+        $products = Product::paginate();
+
+        return view('backend.products.index', compact('products'));
     }
 
     /**
@@ -24,7 +28,22 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.products.index');
+    }
+
+    public function data()
+    {
+        $products = Product::select(['id','name', 'description', 'price', 'created_at','updated_at']);
+
+        return DataTables::of($products->get())
+            ->addColumn('actions',function($product) {
+                $actions = '<a href='. route('products.show', $product->id) .' title="view product"> View </a>
+                        <a href='. route('products.edit', $product->id) .' title="update product"> Update </a>
+                        <a href="javascript:;" class="delete link-danger" data-id="'.$product->id.'" title="delete product"> Delete </a>';
+                return $actions;
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
     }
 
     /**
@@ -35,7 +54,11 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request->input('name');
+
+        Product::create(['name' => $name]);
+
+        return redirect(route('products.index'));
     }
 
     /**
@@ -46,7 +69,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        return __FUNCTION__;
     }
 
     /**
@@ -57,7 +80,14 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        if ($product)
+        {
+            return view('backend.products.edit', compact('product'));
+        }
+
+        return redirect(route('products.index'))
+            ->with('msg', 'Cannot find the product');
     }
 
     /**
@@ -69,7 +99,15 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+        if ($product)
+        {
+            $product->name = $request->input('name');
+            $product->save();
+        }
+
+        return redirect(route('products.index'))
+            ->with('msg', 'Update successful!');
     }
 
     /**
@@ -80,6 +118,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Product::destroy($id);
+
+        return redirect(route('products.index'))
+            ->with('msg', 'Delete successful!');
     }
 }

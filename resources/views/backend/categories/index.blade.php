@@ -4,41 +4,23 @@
     <div class="col-lg-6 grid-margin stretch-card">
         <div class="card">
             <div class="card-body" style="width: 160%">
-                <h4 class="card-title">Category Table</h4>
-                <br>
-                <a  class="btn btn-sm btn-outline-secondary" href="{{ route('categories.create') }}" >Create a new category</a>
-                <table class="table table-hover">
+                <h2 class="card-title" style="float: left; width: 80%">Category Table</h2>
+                <a style="margin-bottom: 30px; float: right; width: 20%"  class="btn btn-sm btn-outline-secondary" href="{{ route('categories.create') }}" >Create a new category</a>
+                <table class="table table-hover" id="table">
                     <thead>
                         <tr>
-                            <th width="5%">#</th>
-                            <th width="40%">Name</th>
-                            <th width="20%">Created at</th>
-                            <th width="20%">Updated at</th>
-                            <th width="15%">Others</th>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Created at</th>
+                            <th>Updated at</th>
+                            <th>Others</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($categories as $category)
-                            <tr>
-                                <td>{{ $category->id }}</td>
-                                <td>{{ $category->name }}</td>
-                                <td>{{ $category->created_at }}</td>
-                                <td>{{ $category->updated_at }}</td>
-                                <td>
-                                    Detail | <a href="{{ route('categories.edit', $category->id) }}">Edit</a>
-                                    | <a href="javascript:;" class="delete" data_id="{{$category->id}}" >Delete</a>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="5"><p>No Product Categories</p></td>
-                            </tr>
-                        @endforelse
+
                     </tbody>
                 </table>
-                <div>
-                    {{ $categories->links() }}
-                </div>
+
             </div>
         </div>
     </div>
@@ -69,18 +51,17 @@
     </div>
 @stop
 
+@section('css')
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+@stop
+
 @section('js')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
     <script>
-        var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {
-            keyboard: false
-        });
-        $( document ).ready(function() {
-            $('.delete').click(function(){
-                var id = $(this).attr('data_id');
-                $('#f_delete').attr('action', '/ims/categories/' + id + '/delete');
-                myModal.toggle();
-            });
-        });
+        categories_data_url = '{{ route('categories.data') }}';
     </script>
+    <script src="{{ asset('js/categories-index.js') }}"></script>
 @stop

@@ -1,5 +1,7 @@
 {
     "/js/dashboard.js": "/js/dashboard.js",
+    "/js/categories-index.js": "/js/categories-index.js",
+    "/js/products-index.js": "/js/products-index.js",
     "/css/login.css": "/css/login.css",
     "/css/style.css": "/css/style.css",
     "/image/face2.jpg": "/image/face2.jpg",
@@ -11,6 +13,8 @@
     "/image/logo-mini.svg": "/image/logo-mini.svg",
     "/image/logo.svg": "/image/logo.svg",
     "/image/Rose.ico": "/image/Rose.ico",
+    "/css/materialdesignicons.min.css": "/css/materialdesignicons.min.css",
+    "/css/font-awesome.min.css": "/css/font-awesome.min.css",
     "/js/Chart.min.js": "/js/Chart.min.js",
     "/js/hoverable-collapse.js": "/js/hoverable-collapse.js",
     "/js/misc.js": "/js/misc.js",

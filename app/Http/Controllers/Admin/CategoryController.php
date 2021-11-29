@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\CategoryRequest;
+use Yajra\DataTables\Facades\DataTables;
 
 class CategoryController extends Controller
 {
@@ -22,6 +23,25 @@ class CategoryController extends Controller
     public function create()
     {
         return view('backend.categories.create');
+    }
+
+    public function data()
+    {
+//        <i data-feather="eye"></i>
+//        <i data-feather="edit"></i>
+//        <i data-feather="trash-2"></i>
+
+        $categories = ProductCategory::select(['id','name','created_at','updated_at']);
+
+        return DataTables::of($categories->get())
+            ->addColumn('actions',function($category) {
+                $actions = '<a href='. route('categories.show', $category->id) .' title="view category" > View </a>
+                        <a href='. route('categories.edit', $category->id) .' title="update category"> Update </a>
+                        <a href="javascript:;" class="delete link-danger" data-id="'.$category->id.'" title="delete category"> Delete </a>';
+                return $actions;
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
     }
 
     /**
@@ -48,7 +68,7 @@ class CategoryController extends Controller
 
     public function show($id)
     {
-        //
+        return __FUNCTION__;
     }
 
     /**

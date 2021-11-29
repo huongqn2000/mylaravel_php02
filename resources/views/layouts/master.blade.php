@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@yield('title')</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="{{asset('css/materialdesignicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/flag-icon.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/vendor.bundle.base.css')}}">
+    @yield('css')
     <!-- endinject -->
     <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="{{ asset('css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}" />
     <link rel="stylesheet" href="{{asset('css/bootstrap-datepicker.min.css')}}">
     <!-- End plugin css for this page -->
@@ -53,8 +54,10 @@
 <script src=" {{ asset('js/misc.js') }} "></script>
 <!-- endinject -->
 <!-- Custom js for this page -->
-<script src=" {{ asset('js/dashboard.js') }} "></script>
+
  <!--End custom js for this page -->
+
 @yield('js')
+<script src=" {{ asset('js/dashboard.js') }} "></script>
 </body>
 </html>

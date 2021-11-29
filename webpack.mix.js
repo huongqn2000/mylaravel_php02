@@ -12,9 +12,13 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/dashboard.js', 'public/js')
+    .js('resources/js/categories-index.js', 'public/js')
+    .js('resources/js/products-index.js', 'public/js')
     .postCss('resources/css/login.css', 'public/css')
     .copy('resources/css/style.css', 'public/css')
     .copy('resources/image', 'public/image')
+    .copy('resources/css/materialdesignicons.min.css', 'public/css')
+    .copy('resources/css/font-awesome.min.css', 'public/css')
     .copy('resources/js/Chart.min.js', 'public/js')
     .copy('resources/js/hoverable-collapse.js', 'public/js')
     .copy('resources/js/misc.js', 'public/js')
