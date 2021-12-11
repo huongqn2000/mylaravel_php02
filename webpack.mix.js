@@ -24,4 +24,6 @@ mix.js('resources/js/dashboard.js', 'public/js')
     .copy('resources/js/misc.js', 'public/js')
     .copy('resources/js/off-canvas.js', 'public/js')
     .copy('resources/js/circle-progress.min.js', 'public/js')
-    .copy('resources/js/vendor.bundle.base.js', 'public/js');
+    .copy('resources/js/vendor.bundle.base.js', 'public/js')
+    .copy('resources/assets', 'public')
+    .copy('resources/frontend', 'public/frontend');

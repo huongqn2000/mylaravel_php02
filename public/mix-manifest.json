@@ -20,5 +20,7 @@
     "/js/misc.js": "/js/misc.js",
     "/js/off-canvas.js": "/js/off-canvas.js",
     "/js/circle-progress.min.js": "/js/circle-progress.min.js",
-    "/js/vendor.bundle.base.js": "/js/vendor.bundle.base.js"
+    "/js/vendor.bundle.base.js": "/js/vendor.bundle.base.js",
+    "/.DS_Store": "/.DS_Store",
+    "/frontend/style.css": "/frontend/style.css"
 }

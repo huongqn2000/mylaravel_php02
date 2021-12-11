@@ -1,28 +1,29 @@
 @extends('layouts.master')
-@section('title', 'Categories')
+@section('title', 'Products')
 @section('main')
     <div class="col-lg-6 grid-margin stretch-card">
         <div class="card">
             <div class="card-body" style="width: 160%">
                 <h2 class="card-title" style="float: left; width: 80%">Product Table</h2>
-                <a style="margin-bottom: 30px; float: right; width: 20%"  class="btn btn-sm btn-outline-secondary" href="{{ route('categories.create') }}" >Create a new product</a>
-                <table class="table table-hover" id="table">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Created at</th>
-                        <th>Updated at</th>
-                        <th>Others</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <a style="margin-bottom: 30px; float: right; width: 20%"  class="btn btn-sm btn-outline-secondary" href="{{ route('products.create') }}" >Create a new product</a>
+                <div class="table-responsive">
+                    <table class="table table-hover" id="table">
+                        <thead>
+                        <tr>
+                            <th width="5%">#</th>
+                            <th width="20%">Name</th>
+                            <th width="25%">Description</th>
+                            <th width="10%">Price</th>
+                            <th width="15%">Created at</th>
+                            <th width="15%">Updated at</th>
+                            <th width="10%">Others</th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-                    </tbody>
-                </table>
-
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

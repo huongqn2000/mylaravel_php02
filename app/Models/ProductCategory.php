@@ -11,9 +11,12 @@ class ProductCategory extends Model
 
     protected $fillable = [
         'id',
-        'name',
-        'created_at',
-        'updated_at'
+        'name'
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d'
     ];
 
     public function product(){

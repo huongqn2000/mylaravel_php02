@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -28,7 +29,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('backend.products.index');
+        $categories = ProductCategory::select(['id', 'name'])->get();
+
+        return view('backend.products.create', compact('categories'));
     }
 
     public function data()
@@ -54,9 +57,24 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $name = $request->input('name');
+        $data = $request->except(['_token']);
 
-        Product::create(['name' => $name]);
+        $images = $this->_upload($request);
+        $imgIds = [];
+        if ($images)
+        {
+            foreach ($images as $image)
+            {
+                $i = Images::create($image);
+                $imgIds[] = $i->id;
+            }
+        }
+
+        $product = Product::create($data);
+        if ($imgIds)
+        {
+            $product->images()->attach($imgIds);
+        }
 
         return redirect(route('products.index'));
     }
@@ -87,7 +105,7 @@ class ProductController extends Controller
         }
 
         return redirect(route('products.index'))
-            ->with('msg', 'Cannot find the product');
+            ->with('msg', 'Cannot find the product!');
     }
 
     /**
@@ -103,6 +121,8 @@ class ProductController extends Controller
         if ($product)
         {
             $product->name = $request->input('name');
+            $product->description = $request->input('description');
+            $product->price = $request->input('price');
             $product->save();
         }
 
@@ -122,5 +142,33 @@ class ProductController extends Controller
 
         return redirect(route('products.index'))
             ->with('msg', 'Delete successful!');
+    }
+
+    private function _upload(Request $request)
+    {
+        $data = [];
+        if ($request->hasFile('image1'))
+        {
+            $path = $request->file('image1')->store('uploads');
+            $data['image1']['name'] = '';
+            $data['image1']['url'] = $path;
+        }
+
+        if ($request->hasFile('image2'))
+        {
+            $path = $request->file('image2')->store('uploads');
+            $data['image2']['name'] = '';
+            $data['image2']['url'] = $path;
+        }
+
+        if ($request->hasFile('image3'))
+        {
+            $path = $request->file('image3')->store('uploads');
+            $data['image3']['name'] = '';
+            $data['image3']['url'] = $path;
+        }
+
+        return $data;
+
     }
 }

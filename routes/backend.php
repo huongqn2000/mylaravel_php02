@@ -11,11 +11,21 @@ Route::prefix('categories')->name('categories.')->group(function (){
     Route::get('/', [CategoryController::class, 'index'])->name('index');
     Route::get('data', [CategoryController::class, 'data'])->name('data');
     Route::get('/show', [CategoryController::class, 'show'])->name('show');
-    Route::get('/create', [CategoryController::class, 'create'])->name('create');
-    Route::post('/create', [CategoryController::class, 'store'])->name('store');
-    Route::get('/{id}/edit', [CategoryController::class, 'edit'])->name('edit');
-    Route::put('/{id}/edit', [CategoryController::class, 'update'])->name('update');
-    Route::delete('/{id}/delete', [CategoryController::class, 'destroy'])->name('delete');
+    Route::get('/create', [CategoryController::class, 'create'])
+        ->middleware('auth.role:admin')
+        ->name('create');
+    Route::post('/create', [CategoryController::class, 'store'])
+        ->middleware('auth.role:admin')
+        ->name('store');
+    Route::get('/{id}/edit', [CategoryController::class, 'edit'])
+        ->middleware('auth.role:admin')
+        ->name('edit');
+    Route::put('/{id}/edit', [CategoryController::class, 'update'])
+        ->middleware('auth.role:admin')
+        ->name('update');
+    Route::delete('/{id}/delete', [CategoryController::class, 'destroy'])
+        ->middleware('auth.role:admin')
+        ->name('delete');
 });
 
 Route::prefix('products')->name('products.')->group(function (){

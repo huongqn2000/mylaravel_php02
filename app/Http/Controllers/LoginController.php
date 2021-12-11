@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -11,21 +11,21 @@ class LoginController extends Controller
         return view('login');
     }
 
-    public function login()
+    public function authenticate(Request $request)
     {
         $credentials = $request->validate([
-            'txtEmail' => ['required', 'email'],
-            'txtPass' => ['required'],
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('home');
+            return redirect()->intended(route('dashboard'));
         }
 
         return back()->withErrors([
-            'txtEmail' => 'The provided credentials do not match our records.',
+            'email' => 'The provided credentials do not match our records.',
         ]);
     }
 

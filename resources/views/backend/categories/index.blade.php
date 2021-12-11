@@ -6,8 +6,9 @@
             <div class="card-body" style="width: 160%">
                 <h2 class="card-title" style="float: left; width: 80%">Category Table</h2>
                 <a style="margin-bottom: 30px; float: right; width: 20%"  class="btn btn-sm btn-outline-secondary" href="{{ route('categories.create') }}" >Create a new category</a>
-                <table class="table table-hover" id="table">
-                    <thead>
+                <div class="table-responsive">
+                    <table class="table table-hover" id="table">
+                        <thead>
                         <tr>
                             <th>#</th>
                             <th>Name</th>
@@ -15,12 +16,11 @@
                             <th>Updated at</th>
                             <th>Others</th>
                         </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

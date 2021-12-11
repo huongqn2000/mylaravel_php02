@@ -35,8 +35,8 @@ class CategoryController extends Controller
 
         return DataTables::of($categories->get())
             ->addColumn('actions',function($category) {
-                $actions = '<a href='. route('categories.show', $category->id) .' title="view category" > View </a>
-                        <a href='. route('categories.edit', $category->id) .' title="update category"> Update </a>
+                $actions = '<a href='. route('categories.show', $category->id) .' title="view category" > View</a> |
+                        <a href='. route('categories.edit', $category->id) .' title="update category"> Update</a> |
                         <a href="javascript:;" class="delete link-danger" data-id="'.$category->id.'" title="delete category"> Delete </a>';
                 return $actions;
             })
@@ -87,7 +87,7 @@ class CategoryController extends Controller
         }
 
         return redirect(route('categories.index'))
-            ->with('msg', 'Cannot find the category');
+            ->with('msg', 'Cannot find the category!');
     }
 
     /**
